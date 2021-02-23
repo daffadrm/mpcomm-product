@@ -22,6 +22,10 @@ const account= sequelize.define('account', {
       },
     ]
   });
+  account.associate = models => {
+    account.belongsTo(models.product, { foreignKey: 'prod_cate_id' })
+
+  }
   return account
 };
 export default account

@@ -38,6 +38,10 @@ const categoryImg = (sequelize,DataTypes)=>{
         },
       ]
     });
+    categoryImg.associate = models => {
+      categoryImg.belongsTo(models.category, { foreignKey: 'caim_cate_id' })
+  
+    }
     return categoryImg
   };
 
