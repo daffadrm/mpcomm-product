@@ -79,6 +79,13 @@ const product = sequelize.define('product', {
       },
     ]
   });
+  product.associate = models => {
+    product.belongsTo(models.category, { foreignKey: 'prod_cate_id' })
+    // product.hasMany(models.brand, { foreignKey: 'prod_brand_id' }),
+    // product.hasMany(models.account, { foreignKey: 'prod_acco_id' }),
+    // product.hasMany(models.condition, { foreignKey: 'prod_cond_id' })
+
+  }
   return product
 };
 export default product

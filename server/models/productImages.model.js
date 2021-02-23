@@ -40,6 +40,8 @@ const productImages =(sequelize,DataTypes)=>{
       },
     ]
   });
+  
+
   return productImages
 }
 export default productImages
