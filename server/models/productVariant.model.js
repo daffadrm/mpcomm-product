@@ -36,6 +36,9 @@ const productVariant = sequelize.define('product_variant', {
       },
     ]
   });
+  productVariant.associate = models => {
+  productVariant.belongsTo(models.product, { foreignKey: 'prova_prod_id' })
+  }
   return productVariant
 };
 export default productVariant

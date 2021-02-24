@@ -5,11 +5,12 @@ const findProduct = async (req, res) => {
 
 const readProduct = async(req,res)=> {
     const product = await req.context.models.product.findAll(
-        // {
-        //     include: [{
-        //         model: req.context.models.status
-        //     }]
-        //   }
+        {
+            include: [{
+                model: req.context.models.productVariant,},
+
+            {model: req.context.models.productImages}]
+          }
     )
     return res.send(product);
 }

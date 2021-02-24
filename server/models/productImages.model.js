@@ -40,7 +40,10 @@ const productImages =(sequelize,DataTypes)=>{
       },
     ]
   });
-  
+    
+    productImages.associate = models => {
+    productImages.belongsTo(models.product, { foreignKey: 'prim_prod_id' })
+    }
 
   return productImages
 }
