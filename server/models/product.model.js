@@ -81,11 +81,13 @@ const product = sequelize.define('product', {
   });
   product.associate = models => {
     product.belongsTo(models.category, { foreignKey: 'prod_cate_id' }),
-    // product.hasMany(models.brand, { foreignKey: 'prod_brand_id' }),
-    // product.hasMany(models.account, { foreignKey: 'prod_acco_id' }),
-    // product.hasMany(models.condition, { foreignKey: 'prod_cond_id' })
     product.hasMany(models.productVariant,{foreignKey: 'prova_prod_id'})
     product.hasMany(models.productImages,{foreignKey: 'prim_prod_id'})
+    product.belongsTo(models.brand, { foreignKey: 'prod_brand_id' }),
+    product.belongsTo(models.condition, { foreignKey: 'prod_cond_name' }),
+    product.belongsTo(models.account, { foreignKey: 'prod_acco_id' })
+    
+
   }
   return product
 };

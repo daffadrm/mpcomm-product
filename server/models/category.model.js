@@ -35,10 +35,12 @@ const category = (sequelize, DataTypes) => {
     ]
   });
   category.associate = models => {
-    // category.hasMany(models.category, { foreignKey: 'cate_cate_id' }),
-    category.hasMany(models.product, { foreignKey: 'prod_cate_id' })
-    // i dont understand this ?
-      // category.belongsTo(models.categoryImg, { foreignKey: 'caim_cate_id' })
+    category.hasMany(models.category, { foreignKey: 'cate_cate_id' }),
+    category.belongsTo(models.category, { foreignKey: 'cate_cate_id' }),
+
+    category.hasMany(models.product, { foreignKey: 'prod_cate_id' }),
+      // i dont understand this ?
+    category.hasOne(models.categoryImg, { foreignKey: 'caim_cate_id' })
 
 
   }

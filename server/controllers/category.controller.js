@@ -13,9 +13,12 @@ const allCategory = async (req, res) => {
     else {
         const cate = await req.context.models.category.findAll(
             {
-                include: [{
-                    model: req.context.models.product
-                }]
+                include: [{model: req.context.models.category,
+                    
+                },{
+                    model: req.context.models.product,
+                    
+                }, {model: req.context.models.categoryImg }]
             }
         );
         // console.log(findAll())

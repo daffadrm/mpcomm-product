@@ -10,8 +10,13 @@ const allCond = async (req,res) => {
         return res.send(cond);
     }
     else {
-        const cond = await req.context.models.condition.findAll();
-        // console.log(findAll())
+        const cond = await req.context.models.condition.findAll( {
+            include: [
+				{
+                model: req.context.models.product
+            }]
+    });
+       
         return res.send(cond);
     }   
 }

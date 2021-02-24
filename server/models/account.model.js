@@ -23,7 +23,7 @@ const account= sequelize.define('account', {
     ]
   });
   account.associate = models => {
-    account.belongsTo(models.product, { foreignKey: 'prod_cate_id' })
+    account.hasMany(models.product, { foreignKey: 'prod_acco_id' })
 
   }
   return account
