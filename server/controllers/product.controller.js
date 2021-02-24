@@ -5,11 +5,18 @@ const findProduct = async (req, res) => {
 
 const readProduct = async(req,res)=> {
     const product = await req.context.models.product.findAll(
-        // {
-        //     include: [{
-        //         model: req.context.models.status
-        //     }]
-        //   }
+        {
+            include: [
+				{
+                model: req.context.models.brand
+            },{
+                model: req.context.models.category
+            },{
+                model: req.context.models.condition
+            },{
+                model: req.context.models.account
+            }]
+          }
     )
     return res.send(product);
 }

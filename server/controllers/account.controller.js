@@ -6,7 +6,13 @@ const readAccount = async(req,res)=> {
         return res.send(account);
     }
     else {
-        const account = await req.context.models.account.findAll();
+        const account = await req.context.models.account.findAll(
+            {
+                include: [
+				{
+                model: req.context.models.product
+            }]}
+        );
         return res.send(account);
     }   
 }

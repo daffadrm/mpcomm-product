@@ -24,6 +24,10 @@ const condition =  (sequelize, DataTypes) => {
         },
       ]
     });
+    condition.associate = models => {
+      condition.hasMany(models.product, { foreignKey: 'prod_cond_name' })
+  
+    }
     return condition
   };
 

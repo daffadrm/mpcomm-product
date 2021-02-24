@@ -26,6 +26,11 @@ const brand =  (sequelize,DataTypes)=>{
           },
         ]
       });
+      brand.associate = models => {
+        brand.hasMany(models.product, { foreignKey: 'prod_brand_id' })
+    
+    
+      }
       return brand
     };
     

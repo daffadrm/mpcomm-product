@@ -9,7 +9,14 @@ const allCateImg = async (req, res) => {
         return res.send(caim);
     }
     else {
-        const caim = await req.context.models.categoryImg.findAll();
+        const caim = await req.context.models.categoryImg.findAll(
+            {
+                include: [{
+                    model: req.context.models.category
+                }
+                ]
+            }
+        );
         // console.log(findAll())
         return res.send(caim);
     }
