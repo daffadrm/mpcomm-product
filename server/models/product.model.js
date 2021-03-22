@@ -4,6 +4,7 @@ const product = (sequelize,DataTypes)=>{
 
 const product = sequelize.define('product', {
     prod_id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true

@@ -7,6 +7,7 @@ import product from "./product.controller"
 import productImages from "./productImages.controller"
 import productVariant from "./productVariant.controller"
 import status from "./status.controller"
+import apiUploadDownload from "./apiUploadDownload"
 
 export default {
     account,
@@ -17,5 +18,6 @@ export default {
     product,
     productImages,
     productVariant,
-    status
+    status,
+    apiUploadDownload
 }

@@ -1,6 +1,7 @@
 const productImages =(sequelize,DataTypes)=>{
   const productImages = sequelize.define('product_images', {
     prim_id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true

@@ -1,7 +1,7 @@
 const readPrim = async(req,res)=> {
-    if (req.body.prim_id){
+    if (req.params.prim_id){
         const prim = await req.context.models.productImages.findByPk(
-            req.body.prim_id,
+            req.params.prim_id,
           );
         return res.send(prim);
     }
@@ -12,9 +12,8 @@ const readPrim = async(req,res)=> {
 }
 
 const createPrim = async (req,res) =>{
-    const { prim_id,prim_filename, prim_path, prim_is_primary,prim_prod_id} = req.body;
+    const {prim_filename, prim_path, prim_is_primary,prim_prod_id} = req.body;
     const prim = await req.context.models.productImages.create({
-      prim_id: prim_id,
       prim_filename : prim_filename,
       prim_path: prim_path,
       prim_is_primary: prim_is_primary,

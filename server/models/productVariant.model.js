@@ -1,6 +1,7 @@
 const productVariant =(sequelize,DataTypes)=>{
 const productVariant = sequelize.define('product_variant', {
     prova_id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true

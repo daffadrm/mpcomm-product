@@ -48,7 +48,7 @@ app.use('/api/product', routes.product)
 app.use('/api/productImages', routes.productImages)
 app.use('/api/productVariant', routes.productVariant)
 app.use('/api/status', routes.status)
-
+app.use('/api/v1', routes.uploadDownload)
 
 
 // Catch unauthorised errors

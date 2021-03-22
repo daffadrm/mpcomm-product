@@ -14,6 +14,7 @@ import product from './product'
 import productImages from './productImages'
 import productVariant from './productVariant'
 import status from './status'
+import uploadDownload from './UploadDownload'
 
 
 export default {
@@ -25,5 +26,6 @@ export default {
   product,
   productImages,
   productVariant,
-  status
+  status,
+  uploadDownload
 };

@@ -1,5 +1,8 @@
 const findProduct = async (req, res) => {
-	const product = await req.context.models.product.findByPk(req.params.prod_id);
+	const product = await req.context.models.product.findByPk(req.params.prod_id,
+		{include:[
+			{model:req.context.models.productImages},
+			{model:req.context.models.productVariant}]});
 	return res.send(product);
 };
 
@@ -29,7 +32,6 @@ const readProduct = async (req, res) => {
 
 const addProduct = async (req, res) => {
 	const {
-		prod_id,
 		prod_name,
 		prod_desc,
 		prod_price,
@@ -41,13 +43,15 @@ const addProduct = async (req, res) => {
 		prod_acco_id,
 		prod_cond_name,
 	} = req.body;
+	console.log('wait')
+	try {
 	const product = await req.context.models.product.create({
-		prod_id: prod_id,
+		
 		prod_name: prod_name,
 		prod_desc: prod_desc,
 		prod_price: prod_price,
 		prod_stock: prod_stock,
-		prod_expire: Date.now(),
+		prod_expire: prod_expire,
 		prod_weight: prod_weight,
 		prod_cate_id: prod_cate_id,
 		prod_brand_id: prod_brand_id,
@@ -55,6 +59,10 @@ const addProduct = async (req, res) => {
 		prod_cond_name: prod_cond_name,
 	})
 	return res.send(product)
+} catch (error) {
+	console.log(error)
+	res.send({error:true})
+}
 }
 
 const editProduct = async (req, res) => {
@@ -70,29 +78,44 @@ const editProduct = async (req, res) => {
 		prod_acco_id,
 		prod_cond_name,
 	} = req.body;
+	try{
 	const product = await req.context.models.product.update({
 		prod_name: prod_name,
 		prod_desc: prod_desc,
 		prod_price: prod_price,
 		prod_stock: prod_stock,
-		prod_expire: Date.now(),
+		prod_expire: prod_expire,
 		prod_weight: prod_weight,
 		prod_cate_id: prod_cate_id,
 		prod_brand_id: prod_brand_id,
 		prod_acco_id: prod_acco_id,
 		prod_cond_name: prod_cond_name,
-	}, {
+	}, { returning:true,
 		where: { prod_id: req.params.prod_id }
 	}
 
 	)
-	return res.sendStatus(200)
+	return res.send(true)
+} catch(error) {
+	res.send({error:true})
+}
 }
 
-const deleteProduct = async (req, res) => {
-	const result = await req.context.models.product.destroy({
-		where: { prod_id: req.params.prod_id },
-	});
+const deleteProduct = async (req, res) => { 
+	try {
+		
+		const deleteVariant = await req.context.models.productVariant.destroy({
+			where: {prova_prod_id: req.params.prod_id}
+		})
+		const deleteImages = await req.context.models.productImages.destroy({
+			where: {prim_prod_id: req.params.prod_id}
+		})
+		const result = await req.context.models.product.destroy({
+			where: { prod_id: req.params.prod_id },
+		});
+	} catch (error) {
+		console.log(error)
+	}
 
 	return res.send(true);
 };
